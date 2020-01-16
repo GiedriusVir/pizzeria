@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Type;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = Types::all();
+        $types = Type::orderBy('priority')->get();
         return view('type.index', ['types' => $types]);
     }
 
@@ -35,7 +36,11 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = new Type;
+        $type->title = $request->type_title;
+        $type->priority = $request->type_priority;
+        $type->save();
+        return redirect()->route('type.index');
     }
 
     /**
@@ -55,9 +60,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Type $type)
     {
-        //
+        return view('type.edit', ['type' => $type]);
     }
 
     /**
@@ -67,9 +72,12 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Type $type)
     {
-        //
+        $type->title = $request->type_title;
+        $type->priority = $request->type_priority;
+        $type->save();
+        return redirect()->route('type.index');
     }
 
     /**
@@ -78,8 +86,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('type.index');
     }
 }

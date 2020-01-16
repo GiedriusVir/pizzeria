@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Group;
 
 class GroupController extends Controller
 {
@@ -13,7 +14,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        $groups = Group::orderBy('title')->get();
+        return view('group.index', ['groups' => $groups]);
     }
 
     /**
@@ -23,7 +25,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('group.create');
     }
 
     /**
@@ -34,7 +36,11 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group = new Group;
+        $group->title = $request->group_title;
+        $group->priority = $request->group_priority;
+        $group->save();
+        return redirect()->route('group.index');
     }
 
     /**
@@ -54,9 +60,9 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Group $group)
     {
-        //
+        return view('group.edit', ['group' => $group]);
     }
 
     /**
@@ -66,9 +72,12 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Group $group)
     {
-        //
+        $group->title = $request->group_title;
+        $group->priority = $request->group_priority;
+        $group->save();
+        return redirect()->route('group.index');
     }
 
     /**
@@ -77,8 +86,9 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Group $group)
     {
-        //
+        $group->delete();
+        return redirect()->route('group.index');
     }
 }
