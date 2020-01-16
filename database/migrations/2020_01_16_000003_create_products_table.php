@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->smallInteger('priority');
             $table->unsignedBigInteger('group_id');
             $table->foreign('type_id')->references('id')->on('types');
-            $table->foreign('group_id')->references('id')->on('groupes');
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
         });
     }
