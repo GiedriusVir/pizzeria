@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesTable extends Migration
+class CreatePickupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('pickups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title', 255);
-            $table->smallInteger('priority');
+            $table->string('address', 255);
+            $table->string('description', 255);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('pickups');
     }
 }

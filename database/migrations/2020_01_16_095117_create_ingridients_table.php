@@ -15,6 +15,8 @@ class CreateIngridientsTable extends Migration
     {
         Schema::create('ingridients', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title', 255);
+            $table->smallInteger('type');
             $table->timestamps();
         });
     }
