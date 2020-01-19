@@ -66,6 +66,46 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Products
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('product.index') }}">
+                                        Products List
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('product.create') }}">
+                                        New Product
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Types
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('type.index') }}">
+                                        Types List
+                                    </a>
+                                        <a class="dropdown-item" href="{{ route('type.create') }}">
+                                        New Type
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Groups
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('group.index') }}">
+                                        Groups List
+                                    </a>
+                                        <a class="dropdown-item" href="{{ route('group.create') }}">
+                                        New Group
+                                    </a>
+                                </div>
+                            </li>
+                                
                         @endguest
                     </ul>
                 </div>

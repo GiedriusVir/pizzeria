@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Type;
+use App\Group;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -13,7 +16,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        $types = Type::all();
+        $groups = Group::all();
+        return view('product.index', [
+            'products' => $products,
+            'types' => $types,
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -23,7 +33,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+        $groups = Group::all();
+        return view('product.create', [
+            'types' => $types,
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -34,7 +49,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // photo
+        $file = $request->file('product_photo');
+        $file_name = $file->getClientOriginalName();
+
+        //Move Uploaded File
+        $destinationPath = public_path() . '/img';
+        $file->move($destinationPath, $file_name);
+
+        $product = new Product;
+        $product->type_id = $request->product_type;
+        $product->size_title = $request->product_size;
+        $product->description = $request->product_description;
+        $product->price = $request->product_price;
+        $product->discount = $request->product_discount;
+        $product->photo = $file_name;
+        $product->priority = $request->product_priority;
+        $product->group_id = $request->product_group;
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -54,9 +88,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $types = Type::all();
+        $groups = Group::all();
+        return view('product.edit', [
+            'product' => $product,
+            'types' => $types,
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -66,9 +106,27 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        // photo
+        $file = $request->file('product_photo');
+        $file_name = $file->getClientOriginalName();
+
+        //Move Uploaded File
+        $destinationPath = public_path() . '/img';
+        $file->move($destinationPath, $file_name);
+
+        $product->type_id = $request->product_type;
+        $product->size_title = $request->product_size;
+        $product->description = $request->product_description;
+        $product->price = $request->product_price;
+        $product->discount = $request->product_discount;
+        $product->photo = $file_name;
+        $product->priority = $request->product_priority;
+        $product->group_id = $request->product_group;
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -77,8 +135,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index');
     }
 }

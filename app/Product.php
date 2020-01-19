@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    //
+    public function productType() {
+        return $this->belongsTo('App\Type', 'type_id', 'id');
+    }
+
+    public function productGroup() {
+        return $this->belongsTo('App\Group', 'group_id', 'id');
+    }
 }
