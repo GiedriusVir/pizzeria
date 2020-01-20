@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'PageController@index')->name('front.index');
+
+
 
 Route::group(['prefix' => 'types'], function(){
     Route::get('', 'TypeController@index')->name('type.index');

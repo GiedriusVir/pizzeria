@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Type;
 
 use Illuminate\Http\Request;
+use App\Type;
+use Validator;
 
 class TypeController extends Controller
 {
@@ -36,11 +37,24 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(),
+            [
+            'type_title' => ['required', 'min:3', 'max:64'],
+            'type_priority' => ['required', 'min:1', 'max:64'],
+            ]
+        );
+
+        if ($validator-> fails()) {
+            $request->flash();
+            return redirect()->route('type.create')->withErrors($validator);
+        }
+
         $type = new Type;
         $type->title = $request->type_title;
         $type->priority = $request->type_priority;
         $type->save();
-        return redirect()->route('type.index');
+        return redirect()->route('type.index')->with('success_message', 'Successfully recorded.');
     }
 
     /**
@@ -74,10 +88,23 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
+
+        $validator = Validator::make($request->all(),
+            [
+            'type_title' => ['required', 'min:3', 'max:64'],
+            'type_priority' => ['required', 'min:1', 'max:64'],
+            ]
+        );
+
+        if ($validator-> fails()) {
+            $request->flash();
+            return redirect()->route('type.create')->withErrors($validator);
+        }
+
         $type->title = $request->type_title;
         $type->priority = $request->type_priority;
         $type->save();
-        return redirect()->route('type.index');
+        return redirect()->route('type.index')->with('success_message', 'Successfully edited.');
     }
 
     /**
@@ -88,7 +115,12 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
+
+        if ($type->productOfType->count()) {
+            return redirect()->route('type.index')->with('info_message', 'Cannot be deleted because the product type category contains products.');
+        }
+
         $type->delete();
-        return redirect()->route('type.index');
+        return redirect()->route('type.index')->with('success_message', 'Successfully deleted.');
     }
 }

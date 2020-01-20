@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Type;
 use App\Group;
 use App\Product;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -49,6 +50,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(),
+            [
+            'product_size' => ['required', 'min:3', 'max:64'],
+            'product_price' => ['required'],
+            'product_discount' => ['required'],
+            'product_priority' => ['required'],
+            ]
+        );
+
+        if ($validator-> fails()) {
+            $request->flash();
+            return redirect()->route('product.create')->withErrors($validator);
+        }
+
         // photo
         $file = $request->file('product_photo');
         $file_name = $file->getClientOriginalName();
@@ -68,7 +84,7 @@ class ProductController extends Controller
         $product->group_id = $request->product_group;
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success_message', 'Successfully recorded.');
     }
 
     /**
@@ -108,6 +124,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+
+        $validator = Validator::make($request->all(),
+            [
+            'product_size' => ['required', 'min:3', 'max:64'],
+            'product_price' => ['required'],
+            'product_discount' => ['required'],
+            'product_priority' => ['required'],
+            ]
+        );
+
+        if ($validator-> fails()) {
+            $request->flash();
+            return redirect()->route('product.create')->withErrors($validator);
+        }
+
         // photo
         $file = $request->file('product_photo');
         $file_name = $file->getClientOriginalName();
@@ -126,7 +157,7 @@ class ProductController extends Controller
         $product->group_id = $request->product_group;
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success_message', 'Successfully edited.');
     }
 
     /**
@@ -138,6 +169,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success_message', 'Successfully deleted.');
     }
 }

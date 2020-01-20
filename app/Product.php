@@ -13,4 +13,8 @@ class Product extends Model
     public function productGroup() {
         return $this->belongsTo('App\Group', 'group_id', 'id');
     }
+    
+    public function productIngridients() {
+        return $this->hasMany('App\ProductIngridient', 'product_id', 'id');
+    }
 }

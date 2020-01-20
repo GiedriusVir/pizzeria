@@ -1,0 +1,94 @@
+header .row {
+    display: inline-block;
+    width: calc(100% - 20px);
+    margin: 10px;
+}
+
+    .brand {
+        display: inline-block;
+        float: left;
+        margin-right: 20px;
+    }
+
+    .advert {
+        display: inline-block;
+        float: left;
+    }
+        .advert-row {
+            display: inline-block;
+            float: left;
+        }
+        .advert-row:first-child {
+            margin-right: 20px;
+        }
+        .advert p {
+            font-size: 20px;
+            line-height: 22px;
+        }
+
+        .advert p:nth-child(2), .advert p:nth-child(3) {
+            color: grey;
+            font-size: 16px;
+        }
+
+    .login {
+        display: inline-block;
+        float: right;
+        padding: 5px 20px;
+        text-align: center;
+        border: 1px solid lightgrey;
+        border-radius: 50px;
+    }
+
+    .nav {
+        display: inline-block;
+        float: left;
+        padding: 10px 0;
+    }
+
+        .nav-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+    .basket {
+        display: inline-block;
+        width: 120px;
+        float: right;
+        color: #fff;
+        background: rgb(255, 105, 0);
+        padding: 10px;
+        text-align: center;
+        border: 1px solid rgb(255, 105, 0);
+        border-radius: 10px;
+    }
+
+.orange-color {
+    color: rgb(255, 105, 0);
+}
+
+@media (max-width: 1300px) {
+    
+}
+  
+@media (max-width: 1000px) {
+    .advert {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .advert-row:first-child {
+        margin-right: 0px;
+    }
+    .advert-row:last-child {
+        float: right;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+
+}
+
+@media (max-width: 600px) {
+
+}

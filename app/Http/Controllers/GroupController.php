@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Group;
+use Validator;
 
 class GroupController extends Controller
 {
@@ -36,11 +37,24 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(),
+            [
+            'group_title' => ['required', 'min:3', 'max:64'],
+            'group_priority' => ['required', 'min:1', 'max:64'],
+            ]
+        );
+
+        if ($validator-> fails()) {
+            $request->flash();
+            return redirect()->route('group.create')->withErrors($validator);
+        }
+
         $group = new Group;
         $group->title = $request->group_title;
         $group->priority = $request->group_priority;
         $group->save();
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success_message', 'Successfully recorded.');
     }
 
     /**
@@ -74,10 +88,22 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        $validator = Validator::make($request->all(),
+            [
+            'group_title' => ['required', 'min:3', 'max:64'],
+            'group_priority' => ['required', 'min:1', 'max:64'],
+            ]
+        );
+
+        if ($validator-> fails()) {
+            $request->flash();
+            return redirect()->route('group.create')->withErrors($validator);
+        }
+
         $group->title = $request->group_title;
         $group->priority = $request->group_priority;
         $group->save();
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success_message', 'Successfully edited.');
     }
 
     /**
@@ -88,7 +114,12 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        if ($group->groupProducts->count()) {
+            return redirect()->route('group.index')->with('info_message', 'Cannot be deleted because the product group
+             category contains products.');
+        }
+
         $group->delete();
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success_message', 'Successfully deleted.');
     }
 }

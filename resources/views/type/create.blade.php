@@ -13,11 +13,11 @@
                     <form action="{{route('type.store')}}" method="post">
                         <div class="form-group">
                             <label for="type_name">Type title</label>
-                            <input class="form-control" type="text" name="type_title">
+                            <input class="form-control" type="text" name="type_title" required>
                         </div>
                         <div class="form-group">
                             <label for="type_priority">Priority</label>
-                            <input class="form-control" type="text" name="type_priority">
+                            <input class="form-control" type="text" name="type_priority" required>
                         </div>
                         @csrf
                         <button class="btn btn-outline-dark" type="submit">Create</button>
