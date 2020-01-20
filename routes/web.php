@@ -16,8 +16,6 @@
 // });
 Route::get('/', 'PageController@index')->name('front.index');
 
-
-
 Route::group(['prefix' => 'types'], function(){
     Route::get('', 'TypeController@index')->name('type.index');
     Route::get('create', 'TypeController@create')->name('type.create');
@@ -47,6 +45,17 @@ Route::group(['prefix' => 'products'], function(){
     Route::post('delete/{product}', 'ProductController@destroy')->name('product.destroy');
     Route::get('show/{product}', 'ProductController@show')->name('product.show');
 });
+
+Route::group(['prefix' => 'ingridients'], function(){
+    Route::get('', 'IngridientController@index')->name('ingridient.index');
+    Route::get('create', 'IngridientController@create')->name('ingridient.create');
+    Route::post('store', 'IngridientController@store')->name('ingridient.store');
+    Route::get('edit/{ingridient}', 'IngridientController@edit')->name('ingridient.edit');
+    Route::post('update/{ingridient}', 'IngridientController@update')->name('ingridient.update');
+    Route::post('delete/{ingridient}', 'IngridientController@destroy')->name('ingridient.destroy');
+    Route::get('show/{ingridient}', 'IngridientController@show')->name('ingridient.show');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
