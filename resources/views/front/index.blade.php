@@ -58,7 +58,7 @@
                                         <img src="{{ asset('img/'.$product->photo) }}" name="{{$product->photo}}" alt="{{$product->photo}}"/>
                                     </div>
                                     <h3>{{$product->productGroup->title}}</h3>
-                                    
+                                    <p>Description</p>
                                     <div class="item-row">
                                         <div class="item-cost">nuo {{$product->price}} €</div>
                                         <div class="item-button">

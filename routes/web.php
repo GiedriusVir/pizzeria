@@ -59,3 +59,12 @@ Route::group(['prefix' => 'ingridients'], function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Paysera testavimo rout'as
+Route::get('paysera-test', 'HomeController@test')->name('test');
+Route::post('pay', 'HomeController@pay')->name('pay');
+
+
+Route::match(['GET', 'POST'], 'accept', 'HomeController@accept')->name('accept');
+Route::match(['GET', 'POST'], 'cancel', 'HomeController@cancel')->name('cancel');
+Route::match(['GET', 'POST'], 'callback', 'HomeController@callback')->name('callback');

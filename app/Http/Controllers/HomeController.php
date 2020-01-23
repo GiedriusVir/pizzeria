@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\Paysera;
 
 class HomeController extends Controller
 {
@@ -25,4 +26,30 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function test(Paysera $paysera)
+    {
+
+        return view('paysera.form');
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function pay(Request $request, Paysera $paysera)
+    {
+        $paysera->pay($request->email, $request->amount); // Laravelis "nuluzta";
+        
+    }
+
+
 }
