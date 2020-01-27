@@ -56,6 +56,16 @@ Route::group(['prefix' => 'ingridients'], function(){
     Route::get('show/{ingridient}', 'IngridientController@show')->name('ingridient.show');
 });
 
+Route::group(['prefix' => 'p-ingridients'], function(){
+    Route::get('', 'ProductIngridientController@index')->name('p-ingridient.index');
+    Route::get('create', 'ProductIngridientController@create')->name('p-ingridient.create');
+    Route::post('store', 'ProductIngridientController@store')->name('p-ingridient.store');
+    Route::get('edit/{group}', 'ProductIngridientController@edit')->name('p-ingridient.edit');
+    Route::post('update/{group}', 'ProductIngridientController@update')->name('p-ingridient.update');
+    Route::post('delete/{p-ingridient}', 'ProductIngridientController@destroy')->name('p-ingridient.destroy');
+    Route::get('show/{p-ingridient}', 'ProductIngridientController@show')->name('p-ingridient.show');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

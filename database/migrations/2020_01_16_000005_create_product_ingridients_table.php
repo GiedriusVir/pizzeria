@@ -19,7 +19,6 @@ class CreateProductIngridientsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('ingridient_id')->references('id')->on('ingridients');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->smallInteger('priority');
             $table->timestamps();
         });
     }
