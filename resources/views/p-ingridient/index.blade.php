@@ -6,31 +6,33 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex">
-                    <p class="h2">Products ingridients</p>
+                    <p class="h2">Products with ingridient list</p>
                     <a class="btn btn-outline-dark ml-auto" href="{{route('ingridient.create')}}">Create</a>
                 </div>
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">#id</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Type</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Ingridients</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($ingridients as $ingridient)
+                        @foreach ($groups as $group)
                         <tr>
-                            <th class="align-middle" scope="row">{{$ingridient->id}}</th>
-                            <td class="align-middle">{{$ingridient->title}}</td>
-                            <td class="align-middle">{{$ingridient->type}}</td>
-                            <td class="d-flex">
-                                <a class="btn btn-outline-dark mr-2" href="{{route('ingridient.edit', [$ingridient])}}">Edit</a>
-                                <form action="{{route('ingridient.destroy', [$ingridient])}}" method="post">
-                                    @csrf
-                                    <button class="btn btn-outline-dark" type="submit">Delete</button>
-                                </form>
+                            <th class="align-middle" scope="row">{{$group->id}}</th>
+                            <td class="align-middle">{{$group->title}}</td>
+                            <td class="align-middle">
+                                @foreach ($group->groupProducts->first()->productIngridients as $key => $item)
+                                    @if ($key > 0)
+                                        {{ Str::lower($item->ingridientsTitle->title)}}{{$loop->last ? '' : ',' }}
+                                    @else
+                                        {{ $item->ingridientsTitle->title }}{{$loop->last ? '' : ',' }}
+                                    @endif
+                                @endforeach
                             </td>
+                            <td class="d-flex"><a class="btn btn-outline-dark mr-2" href="{{route('p-ingridient.edit', [$group])}}">Edit</a></td>
                         </tr>
                         @endforeach
                     </tbody>

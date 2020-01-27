@@ -24,7 +24,7 @@
 
                             @foreach ($ingridients as $ingridient)    
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="igridient[]" value="{{$ingridient->id}}">
+                                    <input class="form-check-input" type="checkbox" name="ingridient[]" value="{{$ingridient->id}}">
                                     <label class="form-check-label" for="defaultCheck1">
                                         {{$ingridient->title}} 
                                         @if ($ingridient->type)
