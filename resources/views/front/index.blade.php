@@ -34,7 +34,17 @@
                     <div class="nav-item" name="contacs">Kontaktai</div>
                 </div>
                 <div class="basket">
-                    Krepšelis | <span id="basket-count">0</span>
+                    Krepšelis | 
+                    <span id="basket-count">
+                        @if(isset($cart))
+                            <br><br>
+                            @foreach ($cart as $product)
+                                {{$product->size_title}} - {{$product->count}} - {{$product->id}}<br>
+                            @endforeach
+                        @else
+                            {{0}}
+                        @endif
+                    </span>
                 </div>
             </div>
         </div>
@@ -61,9 +71,9 @@
                                     <p>Description</p>
                                     <div class="item-row">
                                         <div class="item-cost">nuo {{$product->price}} €</div>
-                                        <div class="item-button">
+                                        <a href="{{route('add', [$product])}}" class="item-button">
                                             Pasirinkti
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -70,6 +70,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Add product to cart route
+Route::get('add-product/{product}', 'CartController@add')->name('add');
+
 // Paysera testavimo rout'as
 Route::get('paysera-test', 'HomeController@test')->name('test');
 Route::post('pay', 'HomeController@pay')->name('pay');
