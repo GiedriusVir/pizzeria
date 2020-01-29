@@ -33,14 +33,16 @@
                     <div class="nav-item" name="promotions">Akcijos</div>
                     <div class="nav-item" name="contacs">Kontaktai</div>
                 </div>
+                {{-- {{dd($cart)}} --}}
                 <div class="basket">
                     Krepšelis | 
                     <span id="basket-count">
-                        @if(isset($cart))
-                            <br><br>
-                            @foreach ($cart as $product)
+                        @if(isset($cart) && count($cart))
+                            {{-- <br> --}}
+                            {{-- @foreach ($cart as $product)
                                 {{$product->size_title}} - {{$product->count}} - {{$product->id}}<br>
-                            @endforeach
+                            @endforeach --}}
+                            {{$items}}
                         @else
                             {{0}}
                         @endif

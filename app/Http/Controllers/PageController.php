@@ -31,12 +31,18 @@ class PageController extends Controller
             $item->count = $counts[$item->id];
         });
 
+        $items = 0;
+        foreach ($cart as $item) {
+            $items += $item->count;
+        }
+
 
         return view('front.index', [
             'products' => $products,
             'groups' => $groups,
             'types' => $types,
-            'cart' => $cart
+            'cart' => $cart,
+            'items' => $items
             ]);
     } 
 }
