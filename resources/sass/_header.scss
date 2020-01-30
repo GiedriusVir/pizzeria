@@ -84,6 +84,12 @@ header .row {
         right: 0px;
     }
 
+    .cart-product {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
     .cart-open {
         opacity: 1;
         transition: opacity .25s ease-in;

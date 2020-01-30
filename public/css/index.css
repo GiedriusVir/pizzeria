@@ -219,6 +219,16 @@ header .row {
   right: 0px;
 }
 
+.cart-product {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
 .cart-open {
   opacity: 1;
   -webkit-transition: opacity 0.25s ease-in;

@@ -51,9 +51,11 @@
                     </div>
                     <div class="cart-hidden" id="cart-hidden">
                         @if(isset($cart) && count($cart))
-                            {{-- <br> --}}
                             @foreach ($cart as $product)
-                                <div>{{$product->size_title}} - {{$product->count}} - {{$product->id}}</div>
+                                <div class="cart-product">
+                                    <div>{{$product->productGroup->title}} (dydis: {{$product->size_title}}) x {{ $product->count}}  </div>
+                                    <div>{{($product->count * $product->price)}} €</div>
+                                </div>
                             @endforeach
                         @else
                             {{0}}
