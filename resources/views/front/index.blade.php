@@ -35,18 +35,30 @@
                 </div>
                 {{-- {{dd($cart)}} --}}
                 <div class="basket">
-                    Krepšelis | 
-                    <span id="basket-count">
+                    <div id="cart">
+                        Krepšelis | 
+                        <span id="basket-count">
+                            @if(isset($cart) && count($cart))
+                                {{-- <br> --}}
+                                {{-- @foreach ($cart as $product)
+                                    {{$product->size_title}} - {{$product->count}} - {{$product->id}}<br>
+                                @endforeach --}}
+                                {{$items}}
+                            @else
+                                {{0}}
+                            @endif
+                        </span>
+                    </div>
+                    <div class="cart-hidden" id="cart-hidden">
                         @if(isset($cart) && count($cart))
                             {{-- <br> --}}
-                            {{-- @foreach ($cart as $product)
-                                {{$product->size_title}} - {{$product->count}} - {{$product->id}}<br>
-                            @endforeach --}}
-                            {{$items}}
+                            @foreach ($cart as $product)
+                                <div>{{$product->size_title}} - {{$product->count}} - {{$product->id}}</div>
+                            @endforeach
                         @else
                             {{0}}
                         @endif
-                    </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,9 +131,10 @@
     </footer>
 
 
-    <script src="./js/data.js"></script>
-    <script src="./js/function.js"></script>
-    <script src="./js/action.js"></script>
+    {{-- <script src="./js/data.js"></script> --}}
+    <script src="{{ asset('js/function.js') }}"></script>
+    <script src="{{ asset('js/action.js') }}"></script>
+    {{-- <script src="./js/action.js"></script> --}}
 
 </body>
 </html>
