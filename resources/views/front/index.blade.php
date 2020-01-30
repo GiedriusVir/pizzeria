@@ -82,7 +82,15 @@
                                         <img src="{{ asset('img/'.$product->photo) }}" name="{{$product->photo}}" alt="{{$product->photo}}"/>
                                     </div>
                                     <h3>{{$product->productGroup->title}}</h3>
-                                    <p>Description</p>
+                                    <p>
+                                        @foreach ($product->productIngridients as $key => $item)
+                                            @if ($key > 0)
+                                                {{ Str::lower($item->ingridientsTitle->title)}}{{$loop->last ? '' : ',' }}
+                                            @else
+                                                {{ $item->ingridientsTitle->title }}{{$loop->last ? '' : ',' }}
+                                            @endif
+                                        @endforeach
+                                    </p>
                                     <div class="item-row">
                                         <div class="item-cost">nuo {{$product->price}} €</div>
                                         <a href="{{route('add', [$product])}}" class="item-button">
